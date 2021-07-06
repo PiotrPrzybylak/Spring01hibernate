@@ -3,6 +3,7 @@ package pl.coderslab.app;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 @EnableWebMvc
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
+
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
@@ -31,4 +33,24 @@ public class AppConfig implements WebMvcConfigurer {
         return jpaTransactionManager;
     }
 
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+//        registry.addConverter(getSkillConverter());
+        registry.addConverter(getPublisherConverter());
+    }
+
+    @Bean
+    public SkillConverter getSkillConverter() {
+        return new SkillConverter();
+    }
+
+    @Bean
+    public PublisherConverter getPublisherConverter() {
+        return new PublisherConverter(getPublisherDao());
+    }
+
+    @Bean
+    public PublisherDao getPublisherDao() {
+        return new PublisherDao();
+    }
 }

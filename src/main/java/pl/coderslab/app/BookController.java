@@ -13,9 +13,11 @@ import java.util.List;
 public class BookController {
 
     private BookDao bookDao;
+    private final PublisherDao publisherDao;
 
-    public BookController(BookDao bookDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao) {
         this.bookDao = bookDao;
+        this.publisherDao = publisherDao;
     }
 
     @GetMapping("/bookform")
@@ -26,16 +28,37 @@ public class BookController {
 
 
     @PostMapping("/bookform")
-    @ResponseBody
     public String addBook(Book book) {
         bookDao.save(book);
-        return "Success!";
+        return "redirect:/books";
+    }
+
+    @GetMapping("/books")
+    public String allBooks(Model model) {
+        List<Book> all = bookDao.all();
+        System.out.println(all);
+        model.addAttribute("books", all);
+        return "books.jsp";
+    }
+
+
+    @GetMapping("/booksbyrating")
+    public String allBooks(Model model, int rating) {
+        List<Book> all = bookDao.findAllByRating(rating);
+        System.out.println(all);
+        model.addAttribute("books", all);
+        return "books.jsp";
     }
 
 
     @ModelAttribute("ratings")
     public List<String> ratings() {
         return List.of("0", "1", "3");
+    }
+
+    @ModelAttribute("publishers")
+    public List<Publisher> publishers() {
+        return publisherDao.all();
     }
 
 }
