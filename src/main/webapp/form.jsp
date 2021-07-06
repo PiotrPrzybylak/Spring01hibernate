@@ -10,11 +10,10 @@
 <body>
 
 
-<form:form method="post" modelAttribute="book">
-    <form:input path="title"/>
-    <form:input path="description"/>
-    <form:select path="rating" items="${ratings}"/>
-    <form:select path="publisher" itemLabel="name" itemValue="id" items="${publishers}"/>
+<form:form method="post" modelAttribute="person">
+
+    <form:password path="password" />
+<form:input path="email" />
     <input type="submit" value="Save">
 </form:form>
 
