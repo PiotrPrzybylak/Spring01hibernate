@@ -25,4 +25,7 @@ public class BookDao {
         return query.getResultList();
     }
 
+    public void save(Book book) {
+        manager.persist(book);
+    }
 }
