@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
+import pl.coderslab.app.springdata.BookDao;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -40,7 +43,7 @@ public class BookController {
 
     @GetMapping("/books")
     public String allBooks(Model model) {
-        List<Book> all = bookDao.all();
+        List<Book> all = bookDao.findAll();
         System.out.println(all);
         model.addAttribute("books", all);
         return "books.jsp";
@@ -50,6 +53,22 @@ public class BookController {
     @GetMapping("/booksbyrating")
     public String allBooks(Model model, int rating) {
         List<Book> all = bookDao.findAllByRating(rating);
+        System.out.println(all);
+        model.addAttribute("books", all);
+        return "books.jsp";
+    }
+
+    @GetMapping("/booksbytitle")
+    public String allBooks(Model model, String title) {
+        Book book = bookDao.findBookByTitle(title);
+
+        model.addAttribute("books", Arrays.asList(book));
+        return "books.jsp";
+    }
+
+    @GetMapping("/booksbycategory")
+    public String allBooks(Model model, long categoryId) {
+        List<Book> all = bookDao.findByCategoryId(categoryId);
         System.out.println(all);
         model.addAttribute("books", all);
         return "books.jsp";

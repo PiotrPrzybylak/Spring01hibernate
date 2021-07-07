@@ -30,11 +30,21 @@ public class Book {
     private String description;
 
     @ManyToOne
-    @NotNull
     private Publisher publisher;
 
     @Min(2)
     private int pages;
+
+    @ManyToOne
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public void setId(Long id) {
         this.id = id;
