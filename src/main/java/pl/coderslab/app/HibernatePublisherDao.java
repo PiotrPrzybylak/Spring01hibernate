@@ -7,9 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
 @Transactional
-public class PublisherDao {
+public class HibernatePublisherDao {
 
     @PersistenceContext
     private EntityManager manager;

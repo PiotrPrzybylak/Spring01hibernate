@@ -32,6 +32,9 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+    @ManyToOne
+    private Author author;
+
     @Min(2)
     private int pages;
 

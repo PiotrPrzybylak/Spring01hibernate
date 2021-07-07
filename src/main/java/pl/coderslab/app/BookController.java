@@ -17,9 +17,9 @@ import java.util.List;
 public class BookController {
 
     private BookDao bookDao;
-    private final PublisherDao publisherDao;
+    private final HibernatePublisherDao publisherDao;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao) {
+    public BookController(BookDao bookDao, HibernatePublisherDao publisherDao) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
     }
@@ -49,6 +49,13 @@ public class BookController {
         return "books.jsp";
     }
 
+    @GetMapping("/bookssorted")
+    public String allBooksSorted(Model model) {
+        List<Book> all = bookDao.findAllByOrderByTitleAsc();
+        System.out.println(all);
+        model.addAttribute("books", all);
+        return "books.jsp";
+    }
 
     @GetMapping("/booksbyrating")
     public String allBooks(Model model, int rating) {

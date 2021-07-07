@@ -56,8 +56,8 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public PublisherDao getPublisherDao() {
-        return new PublisherDao();
+    public HibernatePublisherDao getPublisherDao() {
+        return new HibernatePublisherDao();
     }
 
     @Bean(name="localeResolver")

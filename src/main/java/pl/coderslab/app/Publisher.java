@@ -13,6 +13,9 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String regon;
+    private String nip;
+
 
     public Long getId() {
         return id;
@@ -28,5 +31,21 @@ public class Publisher {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRegon() {
+        return regon;
+    }
+
+    public void setRegon(String regon) {
+        this.regon = regon;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 }

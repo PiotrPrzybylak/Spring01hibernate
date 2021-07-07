@@ -4,9 +4,9 @@ import org.springframework.core.convert.converter.Converter;
 
 public class PublisherConverter implements Converter<String, Publisher> {
 
-    private PublisherDao publisherDao;
+    private HibernatePublisherDao publisherDao;
 
-    public PublisherConverter(PublisherDao publisherDao) {
+    public PublisherConverter(HibernatePublisherDao publisherDao) {
         this.publisherDao = publisherDao;
     }
 
