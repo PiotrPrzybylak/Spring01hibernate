@@ -18,9 +18,13 @@ public class ValidationController {
     @GetMapping("/validate")
     @ResponseBody
     public String validate() {
-        Person2 person2 = new Person2(null, "1234567890123456789012345678901234");
-        Set<ConstraintViolation<Person2>> validate = validator.validate(person2);
+        Book book = new Book();
+        Set<ConstraintViolation<Book>> validate = validator.validate(book);
         System.out.println(validate);
+
+        for (ConstraintViolation<Book> violation : validate) {
+            System.out.println(violation.getPropertyPath() + " : " + violation.getMessage());
+        }
 
         if (validate.isEmpty()) {
             return "OK";
