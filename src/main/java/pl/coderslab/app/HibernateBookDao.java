@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class BookDao {
+public class HibernateBookDao {
 
     @PersistenceContext
     private EntityManager manager;
