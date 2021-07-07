@@ -11,6 +11,7 @@
 
 
 <form:form method="post" modelAttribute="book">
+    <input type="hidden" name="tajne" value="1234">
     <form:input path="title"/>
     <form:input path="description"/>
     <form:select path="rating" items="${ratings}"/>

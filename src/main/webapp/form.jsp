@@ -14,6 +14,7 @@
 
     <form:password path="password" />
 <form:input path="email" />
+
     <input type="submit" value="Save">
 </form:form>
 
