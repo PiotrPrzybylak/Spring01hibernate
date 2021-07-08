@@ -6,8 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.app.springdata.BookDao;
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -28,7 +27,6 @@ public class BookController {
     public String getBookForm(Book book) {
         return "bookform.jsp";
     }
-
 
 
     @PostMapping("/bookform")
@@ -90,6 +88,17 @@ public class BookController {
     @ModelAttribute("publishers")
     public List<Publisher> publishers() {
         return publisherDao.all();
+
+    @GetMapping("/query")
+    @ResponseBody
+    public void testQueries() {
+
+        Category category = new Category();
+        category.setId(1L);
+        List<Book> books = bookDao.findBooksByCategoryUsingQuery(category);
+        System.out.println("Query 1 : " + books);
+        List<Book> books1 = bookDao.findByTitleUsingQuery("tytuł 123");
+        System.out.println("Query 2: " + books1);
     }
 
 }

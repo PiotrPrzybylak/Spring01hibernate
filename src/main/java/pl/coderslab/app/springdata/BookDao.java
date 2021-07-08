@@ -1,6 +1,7 @@
 package pl.coderslab.app.springdata;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import pl.coderslab.app.Author;
 import pl.coderslab.app.Book;
 import pl.coderslab.app.Category;
@@ -25,4 +26,10 @@ public interface BookDao extends JpaRepository<Book, Long> {
     Book findFirstByCategoryOrderByTitle(Category category);
 
     List<Book> findAllByOrderByTitleAsc();
+
+    @Query("select b from Book b where b.title = ?1")
+    List<Book> findByTitleUsingQuery(String title);
+
+    @Query("select b from Book b where b.category = ?1")
+    List<Book> findBooksByCategoryUsingQuery(Category category);
 }
